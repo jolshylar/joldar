@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="create-review layout">
+  <div class="container">
+    <div class="layout__boxer">
+      <div class="layout__boxHeader">
+        <div class="layout__reviewBoxTitle">
+          <a href="{% url 'home' %}">
+            <img src="{% static 'images/icons/arrow-left.svg' %}" />
+          </a>
+          <h3>Create/Update Review</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        <form class="form" action="" method="post">
+          {% csrf_token %}
+
+          <div class="form__group">
+            <label for="review_title">Review Title</label>
+            {{form.title}}
+          </div>
+
+          <div class="form__group">
+            <label for="review_summary">Review Summary</label>
+            {{form.summary}}
+          </div>
+
+          <div class="form__group">
+            <label for="review_body">Review Body</label>
+            {{form.body}}
+          </div>
+
+          <div class="form__action">
+            <button class="btn btn--main" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

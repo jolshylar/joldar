@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="profile-page layout layout--3">
+  <div class="container">
+
+    <div class="reviewList">
+      <div class="profile">
+        <div class="profile__avatar">
+          <div class="avatar avatar--large active">
+            <img src="{% static 'images/avatar.svg' %}" height="30px" />
+          </div>
+        </div>
+        <div class="profile__info">
+          <h3>{{user.name}}</h3>
+          <p>@{{user.username}}</p>
+          {% if request.user == user %}
+          <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="reviewList__header">
+        <div>
+          <h2>Reviews Written by @{{user.username}}</h2>
+        </div>
+        <!-- for loop + reviews in pretty boxes -->
+      </div>
+    </div>
+
+    <div class="reviewLogout">
+      <a href="{% url 'logout' %}">
+        <button class="btn btn--main">
+         <img src="{% static 'images/icons/sign-out.svg' %}" />
+         <p>Sign Out</p>
+       </button>
+     </a>
+    </div>
+
+  </div>
+</main>
+{% endblock content %}

@@ -1,12 +1,23 @@
 {% load static %}
 <header>
     <div class="container">
-        <a href="{% url 'home' %}" style="color: #fff;">
-            <img src="{% static 'images/logo.png' %}" style="height: 20px;" />
+        <a href="{% url 'home' %}" class="header__logo">
+            <img src="{% static 'images/logo.png' %}" />
         </a>
-        <div class="header__menu">
-            <a class="active" href="{% url 'home' %}">Home</a>
+        <nav class="header__menu">
+            <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'about' %}">About</a>
-        </div>
+
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'create-review' %}">Create Review</a>
+            <a href="{% url 'profile' request.user.id %}">
+                <img class="user-img" src="{% static 'images/icons/user.svg' %}" />
+            </a>
+            {% else %}
+            <a href="{% url 'register' %}">
+                <img class="user-img" src="{% static 'images/icons/user.svg' %}" />
+            </a>
+            {% endif %}
+        </nav>
     </div>
 </header>
