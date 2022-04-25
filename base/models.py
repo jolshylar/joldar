@@ -21,6 +21,9 @@ class Review(models.Model):
     def __str__(self):
         return self.title
 
+    def short_content(self):
+        return f'{self.body[0:200]}' + '...' if len(self.body) > 200 else self.body
+
 
 class Comment(models.Model):
     # Comment Content
@@ -36,4 +39,4 @@ class Comment(models.Model):
         ordering = ['-updated', '-created']
 
     def __str__(self):
-        return f'{self.body[0:32]} ...'
+        return f'{self.body[0:32]}'

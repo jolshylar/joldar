@@ -75,7 +75,8 @@ header > .container {
 }
 
 .header__logo > img {
-  height: 35px;
+  max-height: 50px;
+  width: auto;
 }
 
 .header__menu {
@@ -150,7 +151,7 @@ nav > a:hover {
 
 /* about-page */
 .about-page {
-  margin: 20px;
+  margin: 20px 40px;
 }
 
 /*========== Layout Box ==========*/
@@ -160,8 +161,10 @@ nav > a:hover {
   background: var(--color-dark);
   margin: 100px 500px;
   width: 480px;
-  height: 480px;
   box-shadow: 0 0 20px var(--color-light-gray);
+  max-height: max-content;
+  min-height: min-content;
+  padding-bottom: 10px;
 }
 
 .layout__boxTitle > h3 {
@@ -233,8 +236,10 @@ label {
   background: var(--color-dark);
   margin: 100px 500px;
   width: 480px;
-  height: 540px;
+  max-height: max-content;
+  min-height: min-content;
   box-shadow: 0 0 20px var(--color-light-gray);
+  padding-bottom: 10px;
 }
 
 textarea {
@@ -263,3 +268,56 @@ textarea:hover {
   width:5%;
 }
 
+/* ======== Profile Box ====== */
+
+.avatar {
+  display: flex;
+  gap: 3rem;
+  margin-left: 20px;
+}
+
+.profile-img {
+  margin-top: 20px;
+}
+
+.profile-name {
+  margin-top: 30px;
+  font-size: 40px;
+}
+
+.about-user {
+  text-align: center;
+  font-size: 16px;
+  opacity: 40%;
+  margin-top: 10px;
+}
+
+.edit {
+  opacity: 50%;
+}
+
+.edit:hover {
+  font-size: 110%;
+  text-shadow: 0 0 5px orange;
+}
+
+.date {
+ text-align: center;
+ margin-top: 20px;
+}
+
+.layout__boxTitle {
+  text-align: center;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+
+a .arrow-img:hover {
+  height: 5%;
+  width:5%;
+}
+
+code {
+  display: block;
+  white-space: pre-wrap; 
+}

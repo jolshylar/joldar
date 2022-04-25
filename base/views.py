@@ -41,6 +41,7 @@ def review(request, pk):
 
 @login_required(login_url='login')
 def create_review(request):
+    state = 'Create'
     form = ReviewForm()
     if request.method == 'POST':
         Review.objects.create(
@@ -51,12 +52,13 @@ def create_review(request):
         )
         return redirect('home')
 
-    context = {'form': form}
+    context = {'form': form, 'state': state}
     return render(request, 'base/review_form.html', context)
 
 
 @login_required(login_url='login')
 def update_review(request, pk):
+    state = 'Update'
     review = Review.objects.get(id=pk)
     form = ReviewForm(instance=review)
 
@@ -70,7 +72,7 @@ def update_review(request, pk):
         review.save()
         return redirect('home')
     
-    context = {'form': form, 'review': review}
+    context = {'form': form, 'review': review, 'state': state}
     return render(request, 'base/review_form.html', context)
 
 
@@ -166,11 +168,11 @@ def logout_user(request):
 
 def user_profile(request, pk):
     user = User.objects.get(id=pk)
-    reviews = user.review_set.all()
+    latest_review = user.review_set.first()
     review_comments = user.comment_set.all()[0:2]
     context = {
         'user': user,
-        'reviews': reviews,
+        'latest_review': latest_review,
         'review_comments': review_comments,
     }
     return render(request, 'base/profile.html', context)
