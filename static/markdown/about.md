@@ -20,3 +20,4 @@
 
 - Дастан Өзгелді - backend
 - Бек Сламбек - frontend
+- Дарын Жантілеу - team member
