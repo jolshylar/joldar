@@ -27,7 +27,7 @@ class Review(models.Model):
 
 class Comment(models.Model):
     # Comment Content
-    body = models.TextField()
+    body = models.TextField(blank=False)
     # Foreign Keys
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
