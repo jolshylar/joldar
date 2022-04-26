@@ -16,7 +16,11 @@
               <div class="review__info">
                 <h3><a href="{% url 'review' review.id %}">{{review.title}} - {{review.summary}}</a></h3>
                 <div class="paragraph-wrapper">
+                  {% if review.created == review.updated %}
                   <p>Created {{review.created | timesince}} ago</p>
+                  {% else %}
+                  <p>Updated {{review.updated | timesince}} ago</p>
+                  {% endif %}
                 </div>
               </div>
             </div>

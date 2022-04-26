@@ -12,6 +12,22 @@
                 <img src="{% static 'images/avatar.svg' %}" style="height: 36px;" />
                 <h1><a href="{% url 'profile' review.author.id %}">@{{review.author.username}}</a></h1>
               </div>
+              {% if request.user == review.author %}
+              <div class="button-wrapper">
+                <a href="{% url 'update-review' review.id %}">
+                  <button class="baton btn--main">
+                  <img src="{% static 'images/icons/edit.svg' %}" />
+                  <p>Update</p>
+                </button>
+                </a>
+                <a href="{% url 'delete-review' review.id %}">
+                  <button class="baton btn--main">
+                    <img src="{% static 'images/icons/remove.svg' %}" />
+                    <p>Remove</p>
+                  </button>
+                </a>
+              </div>
+              {% endif %}
               <div class="review__info">
                 <h1>{{review.title}} - {{review.summary}}</h1>
                 <div class="paragraph-wrapper">
@@ -28,56 +44,60 @@
                 </div>
               </div>
             </div>
-
-            <div class="review__comment">
-              <form action="" method="POST">
-                {% csrf_token %}
-                <input name="body" placeholder="Leave a comment..." />
-              </form>
-            </div>
-
-            {% if request.user == review.author %}
-            <a href="{% url 'update-review' review.id %}">
-              <button class="btn btn--main">
-               <img src="{% static 'images/icons/edit.svg' %}" />
-               <p>Update</p>
-             </button>
-            </a>
-            <a href="{% url 'delete-review' review.id %}">
-               <button class="btn btn--main">
-                <img src="{% static 'images/icons/remove.svg' %}" />
-                <p>Remove</p>
-              </button>
-            </a>
-            {% endif %}
         </div>
       </div>
       
-      <div class="reviews">
-        {% for comment in review_comments %}
-        <div class="comment__box scroll"> 
-          <div class="comment__header scroll">
-            <div class="comment__author">
-              <img src="{% static 'images/avatar.svg' %}" style="height: 36px;" />
-              <h1><a href="{% url 'profile' comment.author.id %}">@{{comment.author.username}}</a></h1>
-            </div>
-            <div class="comment__info">
-              <div class="paragraph-wrapper">
-                <p>Created {{comment.created | timesince}} ago</p>
+      <div class="comments">
+        <div class="review__comment">
+          {% if user.is_authenticated %}
+          <div class="review__form">
+            <form action="" method="POST">
+              {% csrf_token %}
+              <div class="comment-writer">
+                <input name="body" placeholder="Leave a comment..." />
+                <button type="submit" class="send-btn">Send</button>
               </div>
-            </div>
+            </form>
           </div>
-          <div class="comment__conversation">
-            <div class="threads scroll">
-              <div class="thread">
-                <div class="thread__details">
-                  {{ comment.body | convert_markdown | safe }}
+          {% else %}
+          <h3 style="text-align: center; opacity: 50%;">Login to Leave a Comment!</h3>
+          {% endif %}
+          <div class="comment__box scroll"> 
+          {% for comment in review_comments %}
+            <div class="comment__header scroll">
+              <div class="comment__author">
+                <img src="{% static 'images/avatar.svg' %}" style="height: 36px;" />
+                <h1><a href="{% url 'profile' comment.author.id %}">@{{comment.author.username}}</a></h1>
+                {% if request.user == comment.author %}
+                <div class="delete-button-wrapper">
+                  <a href="{% url 'delete-comment' comment.id %}">
+                    <button class="remove-btn btn--main">
+                      <img src="{% static 'images/icons/remove.svg' %}" />
+                    </button>
+                  </a>
+                </div>
+                {% endif %}
+              </div>
+              <div class="comment__info">
+                <div class="paragraph-wrapper">
+                  <p>Created {{comment.created | timesince}} ago</p>
                 </div>
               </div>
             </div>
+            <div class="comment__conversation">
+              <div class="threads scroll">
+                <div class="thread">
+                  <div class="thread__details">
+                    {{ comment.body | convert_markdown | safe }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            {% endfor %}
           </div>
         </div>
-        {% endfor %}
       </div>
     </div>
 </main>

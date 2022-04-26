@@ -25,12 +25,10 @@
           {% endfor %}
 
           <div class="form__action">
-            <a href="{% url 'profile' user.id %}">
-              <button class="btn btn--main" type="submit">
-                <img src="{% static 'images/icons/edit.svg' %}" />
-                <p>Update</p>
-              </button>
-            </a>
+            <button class="btn btn--main" type="submit">
+              <img src="{% static 'images/icons/edit.svg' %}" />
+              <p>Update</p>
+            </button>
           </div>
         </form>
       </div>

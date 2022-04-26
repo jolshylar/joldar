@@ -8,7 +8,7 @@
       <div class="layout__boxHeader">
         <div class="layout__boxTitle">
           <a href="{{request.META.HTTP_REFERER}}">
-            <img src="{% static 'images/icons/arrow-left.css' %}" />
+            <img class="arrow-img" src="{% static 'images/icons/arrow-left.svg' %}" />
           </a>
           <h3>Back</h3>
         </div>
@@ -16,12 +16,16 @@
       <div class="layout__body">
         <form class="form" action="" method="post">
           {% csrf_token %}
-          <div class="form__group">
-            <p>Are you sure you want to delete "{{obj}}"?</p>
-          </div>
+          <!-- <div class="form__group"> -->
+          <p style="text-align: center;">Are you sure you want to delete "{{obj}}"?</p>
+          <!-- </div> -->
 
-          <div class="for__group">
-            <input class="btn btn--main" type="submit" value="Confirm" />
+          <div class="confirm__group">
+            <button class="btn btn--main" type="submit" value="Confirm">
+              <img src="{% static 'images/icons/delete.svg' %}" />
+              <p>Confirm</p>
+            </button>
+            <!-- <input class="btn btn--main" type="submit" value="Confirm" /> -->
           </div>
         </form>
       </div>
