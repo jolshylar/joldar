@@ -149,7 +149,7 @@ nav > a:hover {
   color: var(--color-light-gray);
 }
 
-/* about-page */
+/*===== About Page ====*/
 .about-page {
   margin: 20px 40px;
 }
@@ -193,7 +193,8 @@ label {
   margin-left: 25px;
   width: 50%;
   border-radius: 5px;
-  background-color: var(--color-light-gray);
+  color: var(--color-light);
+  background-color: var(--color-bg);
   height: 30px;
   border: none;
   padding-left: 5px;
@@ -246,7 +247,8 @@ textarea {
   margin-left: 25px;
   width: 80%;
   border-radius: 5px;
-  background-color: var(--color-light-gray);
+  color: var(--color-light);
+  background-color: var(--color-bg);
   border: none;
   padding: 5px;
   resize: none;
@@ -320,4 +322,130 @@ a .arrow-img:hover {
 code {
   display: block;
   white-space: pre-wrap; 
+}
+
+/*===== Review Main =====*/
+
+.baton {
+  text-align: center;
+  border: none;
+  width: 80px;
+  height: 60px;
+  border-radius: 10%;
+  background-color: var(--color-bg);
+  color: var(--color-light);
+}
+
+.baton:hover {
+  box-shadow: 0 0 5px var(--color-light);
+}
+
+.baton img {
+  height: 45%;
+}
+
+.button-wrapper {
+  margin-top: 10px;
+}
+
+/* ===== Comments ===== */
+.review__form input {
+  margin-left: 25px;
+  width: 91%;
+  color: var(--color-light);
+  border-radius: 5px 0 0 5px;
+  background-color: var(--color-bg);
+  height: 30px;
+  border-bottom: 2px solid var(--color-light);
+  padding-left: 5px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.review__form input:hover {
+  box-shadow: 0 0 5px var(--color-light);
+}
+
+.review__form input::placeholder { 
+  color: var(--color-light);
+  opacity: 50%;
+}
+
+.send-btn {
+  text-align: center;
+  border: none;
+  width: 5%;
+  height: 32px;
+  border-radius: 0 10% 10% 0;
+  background-color: var(--color-main);
+  color: var(--color-light);
+  border-bottom: 2px solid var(--color-light);
+}
+
+.send-btn:hover {
+  box-shadow: 0 0 5px var(--color-light);
+}
+
+.comment-writer {
+  display: flex;
+  gap: 0;
+}
+
+.comment__box {
+  background-color: var(--color-dark);
+  border-radius: 20px;
+  margin:10px 20px;
+  border: 1px solid var(--color-light);
+  box-shadow: 0 0 1px var(--color-light);
+}
+
+.comment__header {
+  margin-left: 16px;
+  margin-top:16px;
+}
+
+.comment__conversation {
+  margin: 16px;
+  margin-top: 10px;
+}
+
+.comment__info p {
+  font-size: 12px;
+}
+
+.comment__conversation {
+  color: var(--color-light);
+}
+
+.comment__author {
+  display: flex;
+  gap: 1rem;
+}
+
+.comment__author h1 {
+  font-size: 24px;
+}
+
+.comment__author a {
+  color: var(--color-light-gray);
+}
+
+.remove-btn {
+  text-align: center;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10%;
+  background-color: var(--color-bg);
+  color: var(--color-light);
+  font-size: 45%;
+}
+
+.remove-btn:hover {
+  box-shadow: 0 0 5px var(--color-light);
+}
+
+.remove-btn img {
+  height: 50%;
 }
