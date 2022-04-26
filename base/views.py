@@ -32,7 +32,7 @@ def review(request, pk):
 
     context = {
         'review': review,
-        'review_messages': review_comments,
+        'review_comments': review_comments,
     }
     return render(request, 'base/review.html', context)
 
@@ -101,7 +101,7 @@ def delete_comment(request, pk):
     if request.method == 'POST':
         comment.delete()
         # TODO: think whether to redirect to a parent comment or home
-        return redirect('home')
+        return redirect('review', comment.review.id)
 
     context = {'obj': comment}
     return render(request, 'base/delete.html', context)
@@ -187,7 +187,7 @@ def update_user(request):
         form = UserForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            redirect('profile', pk=user.id)
+            return redirect('profile', pk=user.id)
 
     context = {'form': form}
     return render(request, 'base/update_user.html', context)
