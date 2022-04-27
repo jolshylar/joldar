@@ -70,6 +70,11 @@
                 <h1><a href="{% url 'profile' comment.author.id %}">@{{comment.author.username}}</a></h1>
                 {% if request.user == comment.author %}
                 <div class="delete-button-wrapper">
+                  <a href="{% url 'update-comment' comment.id %}">
+                    <button class="remove-btn btn--main">
+                      <img src="{% static 'images/icons/edit.svg' %}" />
+                    </button>
+                  </a>
                   <a href="{% url 'delete-comment' comment.id %}">
                     <button class="remove-btn btn--main">
                       <img src="{% static 'images/icons/remove.svg' %}" />

@@ -77,6 +77,23 @@ def update_review(request, pk):
 
 
 @login_required(login_url='login')
+def update_comment(request, pk):
+    comment = Comment.objects.get(id=pk)
+    old_body = comment.body
+    
+    if request.user != comment.author:
+        return HttpResponse('You are not allowed here!')
+
+    if request.method == 'POST':
+        comment.body = request.POST.get('body')
+        comment.save()
+        return redirect('review', pk=comment.review.id)
+
+    context = {'old_body': old_body}
+    return render(request, 'base/update_comment.html', context)
+
+
+@login_required(login_url='login')
 def delete_review(request, pk):
     review = Review.objects.get(id=pk)
 

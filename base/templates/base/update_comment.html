@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="create-review layout">
+  <div class="container">
+    <div class="layout__boxer">
+      <div class="layout__boxHeader">
+        <div class="layout__reviewBoxTitle">
+          <a href="{% url 'home' %}">
+            <img src="{% static 'images/icons/arrow-left.svg' %}" />
+          </a>
+          <h3>Update Comment</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        <form class="form" action="" method="post">
+          {% csrf_token %}
+          <div class="form__group">
+            <label for="comment_body">Comment Body</label>
+            <textarea name="body" placeholder="Write an update for your comment">{{old_body}}</textarea>
+          </div>
+          <div class="form__action">
+            <button class="btn btn--main" type="submit">
+              <img src="{% static 'images/icons/add.svg' %}" > 
+              <p>Update</p>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}

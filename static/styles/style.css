@@ -35,7 +35,7 @@ html {
 body {
   line-height: 1.6;
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 1.5vmax;
   color: var(--color-light-gray);
   background-color: var(--color-bg);
   min-height: 100vh;
@@ -65,7 +65,7 @@ header {
 
 header > .container {
   display: flex;
-  gap: 9.5rem;
+  gap: 9.5vw;
 }
 
 .header__logo {
@@ -75,7 +75,7 @@ header > .container {
 }
 
 .header__logo > img {
-  max-height: 50px;
+  max-height: 8vh;
   width: auto;
 }
 
@@ -84,7 +84,7 @@ header > .container {
   position: relative;
   display: flex;
   justify-content: space-between;
-  gap: 2.5rem;
+  gap: 2.5vw;
   align-items: center;
 }
 
@@ -101,10 +101,6 @@ nav > a:hover {
   text-shadow: 0 0 5px orange;
 }
 
-.header__menu img {
-  height: 3.6rem;
-}
-
 /*====== Review Page =====*/
 .review__box {
   background-color: var(--color-dark);
@@ -115,8 +111,8 @@ nav > a:hover {
 }
 
 .review__header {
-  margin-left: 16px;
-  margin-top:16px;
+  margin-left: 2rem;
+  margin-top: 1rem;
 }
 
 .review__conversation {
@@ -222,12 +218,12 @@ label {
 
 .auth__action {
   text-align: center;
-  margin-top:10%;
+  margin-top: 10%;
 }
 
 .auth__action__log {
   text-align: center;
-  margin-top:20%;
+  margin-top: 20%;
 }
 
 /* Review Writing */
@@ -267,7 +263,7 @@ textarea:hover {
 
 .layout__reviewBoxTitle a img:hover {
   height: 5%;
-  width:5%;
+  width: 5%;
 }
 
 /* ======== Profile Box ====== */
@@ -452,7 +448,7 @@ code {
 
 /* ===== Footer ===== */
 
-.footer{
+.footer {
   background-color: var(--color-dark);
 }
 
