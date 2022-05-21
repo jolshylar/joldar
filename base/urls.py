@@ -19,5 +19,4 @@ urlpatterns = [
     path('delete-review/<str:pk>/', views.delete_review, name='delete-review'),
     path('delete-comment/<str:pk>/', views.delete_comment, name='delete-comment'),
     path('update-user/', views.update_user, name='update-user'),
-    # TODO: add component-pages
 ]

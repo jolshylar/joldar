@@ -105,7 +105,7 @@ nav > a:hover {
 .review__box {
   background-color: var(--color-dark);
   border-radius: 20px;
-  margin:10px 20px;
+  margin:10px 2vw;
   border: 1px solid var(--color-light);
   box-shadow: 0 0 1px var(--color-light);
 }
@@ -147,7 +147,7 @@ nav > a:hover {
 
 /*===== About Page ====*/
 .about-page {
-  margin: 20px 40px;
+  margin: 20px 10rem;
 }
 
 /*========== Layout Box ==========*/
@@ -155,12 +155,29 @@ nav > a:hover {
 .layout__box {
   border-radius: 10px;
   background: var(--color-dark);
-  margin: 100px 500px;
-  width: 480px;
+  margin: 10vh 30%;
+  width: 40%;
   box-shadow: 0 0 20px var(--color-light-gray);
   max-height: max-content;
   min-height: min-content;
   padding-bottom: 10px;
+}
+
+@media only screen and (max-width: 480px) {
+  .layout__box {
+    margin-left: 5%;
+    width: 90%;
+  }
+
+  .layout__boxer {
+    margin-left: 5%;
+    width: 90%;
+  }
+
+  .about-page {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
 }
 
 .layout__boxTitle > h3 {
@@ -175,8 +192,8 @@ nav > a:hover {
   margin-bottom: 5px;
 }
 
-label {
-  margin-left: 25px;
+.layout__box label {
+  margin-left: 25%;
 }
 
 .form__group {
@@ -185,8 +202,11 @@ label {
   margin-bottom: 10px;
 }
 
+.layout__box input {
+  margin-left: 25%;
+}
+
 .form__group input {
-  margin-left: 25px;
   width: 50%;
   border-radius: 5px;
   color: var(--color-light);
@@ -203,9 +223,9 @@ label {
 .btn {
   text-align: center;
   border: none;
-  width: 110px;
+  width: 20%;
   height: 70px;
-  margin-left: 185px;
+  margin-left: 40%;
   margin-top: 20px;
   border-radius: 10%;
   background-color: var(--color-bg);
@@ -231,7 +251,7 @@ label {
 .layout__boxer {
   border-radius: 10px;
   background: var(--color-dark);
-  margin: 100px 500px;
+  margin: 100px 36vw;
   width: 480px;
   max-height: max-content;
   min-height: min-content;
@@ -346,8 +366,8 @@ code {
 
 /* ===== Comments ===== */
 .review__form input {
-  margin-left: 25px;
-  width: 91%;
+  margin-left: 2vw;
+  width: 90%;
   color: var(--color-light);
   border-radius: 5px 0 0 5px;
   background-color: var(--color-bg);
@@ -359,6 +379,18 @@ code {
   border-right: none;
 }
 
+.send-btn {
+  text-align: center;
+  border: none;
+  width: 10%;
+  height: 32px;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--color-main);
+  color: var(--color-light);
+  border-bottom: 2px solid var(--color-light);
+  margin-right: 2vw;
+}
+
 .review__form input:hover {
   box-shadow: 0 0 5px var(--color-light);
 }
@@ -368,16 +400,6 @@ code {
   opacity: 50%;
 }
 
-.send-btn {
-  text-align: center;
-  border: none;
-  width: 5%;
-  height: 32px;
-  border-radius: 0 10% 10% 0;
-  background-color: var(--color-main);
-  color: var(--color-light);
-  border-bottom: 2px solid var(--color-light);
-}
 
 .send-btn:hover {
   box-shadow: 0 0 5px var(--color-light);
@@ -391,7 +413,7 @@ code {
 .comment__box {
   background-color: var(--color-dark);
   border-radius: 20px;
-  margin:10px 20px;
+  margin:10px 2vw;
   border: 1px solid var(--color-light);
   box-shadow: 0 0 1px var(--color-light);
 }
@@ -471,3 +493,4 @@ code {
   text-align:center;
   border-top: 1px solid;
 }
+
