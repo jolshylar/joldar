@@ -22,7 +22,7 @@ from base.models import Comment, Review
 class HomeView(ListView):
     model = Review
     template_name: str = "base/home.html"
-    # TODO: add pagination
+    paginate_by: int = 3
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
