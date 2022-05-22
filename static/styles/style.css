@@ -196,18 +196,19 @@ nav > a:hover {
   margin-left: 25%;
 }
 
-.form__group {
-  display: flex; 
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
 .layout__box input {
   margin-left: 25%;
 }
 
-.form__group input {
+.form__group {
+  display: flex; 
+  flex-direction: column;
+  margin-bottom: 10px;
   width: 50%;
+  margin-left: 25%;
+}
+
+.form__group input {
   border-radius: 5px;
   color: var(--color-light);
   background-color: var(--color-bg);
