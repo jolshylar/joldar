@@ -1,5 +1,5 @@
 # Joldar 🌱
-- A web app to write reviews about roads quality in Kazakhstan .
+- A web app to write reviews about roads quality in Kazakhstan.
 
 ---
 

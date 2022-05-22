@@ -487,3 +487,45 @@ code {
   border-top: 1px solid;
 }
 
+/* ===== About Page ===== */
+
+.about-page {
+  font-size: 2rem;
+  margin: 5%;
+  box-shadow: 1px 1px 6px 3px var(--color-light);
+  border-radius: 10px;
+}
+
+.about-page h1 {
+  text-transform: uppercase;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.about-page ul {
+  list-style-position: inside;
+  list-style-type: none;
+}
+
+.about-page li {
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+  .about-page {
+    font-size: 1.5rem;
+    margin: 5% 0;
+  }
+
+  .about-page h1 {
+    font-size: 2srem;
+    padding-top: 1rem;
+  }
+
+  .about-page li {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
