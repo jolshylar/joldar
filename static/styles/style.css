@@ -192,14 +192,6 @@ nav > a:hover {
   margin-bottom: 5px;
 }
 
-.layout__box label {
-  margin-left: 25%;
-}
-
-.layout__box input {
-  margin-left: 25%;
-}
-
 .form__group {
   display: flex; 
   flex-direction: column;
