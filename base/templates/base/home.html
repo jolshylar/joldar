@@ -3,9 +3,21 @@
 
 {% block content %}
 <main>
-  <div class="container">
-    <div class="reviews">
-      {% for review in all_reviews %}
+  <div class="container container-home">
+    <div class="left-arrow">
+      {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">
+        <img src="{% static 'images/left-arrow.png' %}" alt="left-arrow" />
+      </a>
+      {% else %}
+      <a href="?page={{ page_obj.paginator.num_pages }}">
+        <img src="{% static 'images/left-arrow.png' %}" alt="left-arrow" />
+      </a>
+      {% endif %}
+    </div>
+
+    <div class="reviews review-home">
+      {% for review in page_obj %}
       <div class="review__box scroll"> 
         <div class="review__header scroll">
           <div class="review__author">
@@ -13,7 +25,7 @@
             <h1><a href="{% url 'profile' review.author.id %}">@{{ review.author.username }}</a></h1>
           </div>
           <div class="review__info">
-            <h3><a href="{% url 'review' review.id %}">{{ review.title}} - {{ review.summary }}</a></h3>
+            <h3><a href="{% url 'review' review.id %}">{{ review.title }} - {{ review.summary }}</a></h3>
             <div class="paragraph-wrapper">
               <p>Created {{ review.created | timesince }} ago</p>
             </div>
@@ -33,6 +45,18 @@
         </div>
       </div>
       {% endfor %}
+    </div>
+
+    <div class="right-arrow">
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">
+        <img src="{% static 'images/right-arrow.png' %}" alt="right-arrow" />
+      </a>
+      {% else %}
+      <a href="?page=1">
+        <img src="{% static 'images/right-arrow.png' %}" alt="right-arrow" />
+      </a>
+      {% endif %}
     </div>
   </div>
 </main>
