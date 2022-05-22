@@ -8,10 +8,10 @@ class Review(models.Model):
     title = models.CharField(max_length=200)
     summary = models.CharField(max_length=200)
     body = models.TextField()
-    # TODO: may add images to show.
+    # TODO: add images to show.
     # Foreign Keys
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    # Time
+    # Timestamps
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -31,7 +31,7 @@ class Comment(models.Model):
     # Foreign Keys
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
-    # Time
+    # Timestamps
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
