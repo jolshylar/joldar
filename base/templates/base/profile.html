@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load base_extras %}
+{% load static base_extras %}
 
 {% block content %}
 <main class="profile-page layout layout--3">
@@ -8,13 +7,11 @@
    <div class="layout__box">
     <div class="reviewList">
       <div class="profile">
-        <div class="profile__avatar">
-        </div>
         <div class="profile__info">
           <div class="avatar avatar--large active">
             <img src="{% static 'images/avatar.svg' %}" height="100px" class="profile-img"/>
             <div>
-              <h1 class="profile-name">@{{user.username}}</h1>
+              <h1 class="profile-name">@{{ user.username }}</h1>
               {% if request.user == user %}
               <a href="{% url 'update-user' %}" class="edit">Edit Profile</a>
               {% endif %}
@@ -25,7 +22,7 @@
           <div class="reviewList__header">
             {% if latest_review %}
             <div>
-              <h2 class="about-user">Latest Review by @{{user.username}}</h2>
+              <h2 class="about-user">Latest Review by @{{ user.username }}</h2>
             </div>
             <!-- for loop + reviews in pretty boxes -->
             <div class="review__box scroll"> 
@@ -70,7 +67,6 @@
      </a>
     </div>
     {% endif %}
-
   </div>
   </div>
 </main>

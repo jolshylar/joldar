@@ -1,44 +1,39 @@
 {% extends 'base.html' %}
-{% load base_extras %}
-{% load static %}
+{% load static base_extras %}
 
 {% block content %}
 <main>
-    <div class="container">
-        <div class="reviews">
-          {% for review in all_reviews %}
-          <div class="review__box scroll"> 
-            <div class="review__header scroll">
-              <div class="review__author">
-                <img src="{% static 'images/avatar.svg' %}" style="height: 36px;" />
-                <h1><a href="{% url 'profile' review.author.id %}">@{{review.author.username}}</a></h1>
-              </div>
-              <div class="review__info">
-                <h3><a href="{% url 'review' review.id %}">{{review.title}} - {{review.summary}}</a></h3>
-                <div class="paragraph-wrapper">
-                  {% if review.created == review.updated %}
-                  <p>Created {{review.created | timesince}} ago</p>
-                  {% else %}
-                  <p>Updated {{review.updated | timesince}} ago</p>
-                  {% endif %}
-                </div>
-              </div>
+  <div class="container">
+    <div class="reviews">
+      {% for review in all_reviews %}
+      <div class="review__box scroll"> 
+        <div class="review__header scroll">
+          <div class="review__author">
+            <img src="{% static 'images/avatar.svg' %}" style="height: 36px;" />
+            <h1><a href="{% url 'profile' review.author.id %}">@{{ review.author.username }}</a></h1>
+          </div>
+          <div class="review__info">
+            <h3><a href="{% url 'review' review.id %}">{{ review.title}} - {{ review.summary }}</a></h3>
+            <div class="paragraph-wrapper">
+              <p>Created {{ review.created | timesince }} ago</p>
             </div>
-            <div class="review__conversation">
-              <div class="threads scroll">
-                <div class="thread">
-                  <div class="thread__details">
-                    {{ review.short_content | convert_markdown | safe }}
-                    {% if review.body|length > 200 %}
-                    <a href="{% url 'review' review.id %}">Read More</a>
-                    {% endif %}
-                  </div>
-                </div>
+          </div>
+        </div>
+        <div class="review__conversation">
+          <div class="threads scroll">
+            <div class="thread">
+              <div class="thread__details">
+                {{ review.short_content | convert_markdown | safe }}
+                {% if review.body|length > 200 %}
+                <a href="{% url 'review' review.id %}">Read More</a>
+                {% endif %}
               </div>
             </div>
           </div>
-          {% endfor %}
         </div>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </main>
 {% endblock content %}
