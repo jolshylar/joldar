@@ -1,3 +1,5 @@
+from typing import Dict, Any, Optional
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -6,205 +8,227 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.conf import settings
-
+# Class-based Views
+from django.views import View
+from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+# Local imports
 from base.forms import ReviewForm, UserForm
+from base.models import Comment, Review
 
-from .models import Comment, Review
 
+class HomeView(ListView):
+    model = Review
+    template_name: str = "base/home.html"
+    # TODO: add pagination
 
-def home(request):
-    all_reviews = Review.objects.all()
-    context = {'all_reviews': all_reviews}
-    return render(request, 'base/home.html', context)
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["all_reviews"] = Review.objects.all()
+        return context
 
 
 def review(request, pk):
     review = Review.objects.get(id=pk)
     review_comments = review.comment_set.all()
 
-    if request.method == 'POST':
+    if request.method == "POST":
         Comment.objects.create(
-            body=request.POST.get('body'),
+            body=request.POST.get("body"),
             author=request.user,
             review=review,
         )
-        return redirect('review', pk=review.id)
+        return redirect("review", pk=review.id)
 
     context = {
-        'review': review,
-        'review_comments': review_comments,
+        "review": review,
+        "review_comments": review_comments,
     }
-    return render(request, 'base/review.html', context)
+    return render(request, "base/review.html", context)
 
 
 # ===== REVIEW CRUD =====
 
-@login_required(login_url='login')
+
+@login_required(login_url="login")
 def create_review(request):
-    state = 'Create'
+    state = "Create"
     form = ReviewForm()
-    if request.method == 'POST':
+    if request.method == "POST":
         Review.objects.create(
-            title=request.POST.get('title'),
-            summary=request.POST.get('summary'),
-            body=request.POST.get('body'),
+            title=request.POST.get("title"),
+            summary=request.POST.get("summary"),
+            body=request.POST.get("body"),
             author=request.user,
         )
-        return redirect('home')
+        return redirect("home")
 
-    context = {'form': form, 'state': state}
-    return render(request, 'base/review_form.html', context)
+    context = {"form": form, "state": state}
+    return render(request, "base/review_form.html", context)
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def update_review(request, pk):
-    state = 'Update'
+    state = "Update"
     review = Review.objects.get(id=pk)
     form = ReviewForm(instance=review)
 
     if request.user != review.author:
-        return HttpResponse('You are not allowed here!')
+        return HttpResponse("You are not allowed here!")
 
-    if request.method == 'POST':
-        review.title = request.POST.get('title')
-        review.summary = request.POST.get('summary')
-        review.body = request.POST.get('body')
+    if request.method == "POST":
+        review.title = request.POST.get("title")
+        review.summary = request.POST.get("summary")
+        review.body = request.POST.get("body")
         review.save()
-        return redirect('home')
-    
-    context = {'form': form, 'review': review, 'state': state}
-    return render(request, 'base/review_form.html', context)
+        return redirect("home")
+
+    context = {"form": form, "review": review, "state": state}
+    return render(request, "base/review_form.html", context)
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def update_comment(request, pk):
     comment = Comment.objects.get(id=pk)
     old_body = comment.body
-    
+
     if request.user != comment.author:
-        return HttpResponse('You are not allowed here!')
+        return HttpResponse("You are not allowed here!")
 
-    if request.method == 'POST':
-        comment.body = request.POST.get('body')
+    if request.method == "POST":
+        comment.body = request.POST.get("body")
         comment.save()
-        return redirect('review', pk=comment.review.id)
+        return redirect("review", pk=comment.review.id)
 
-    context = {'old_body': old_body}
-    return render(request, 'base/update_comment.html', context)
+    context = {"old_body": old_body}
+    return render(request, "base/update_comment.html", context)
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def delete_review(request, pk):
     review = Review.objects.get(id=pk)
 
     if request.user != review.author:
-        return HttpResponse('You are not allowed here!')
-    
-    if request.method == 'POST':
+        return HttpResponse("You are not allowed here!")
+
+    if request.method == "POST":
         review.delete()
-        return redirect('home')
+        return redirect("home")
 
-    context = {'obj': review}
-    return render(request, 'base/delete.html', context)
+    context = {"obj": review}
+    return render(request, "base/delete.html", context)
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def delete_comment(request, pk):
     comment = Comment.objects.get(id=pk)
 
     if request.user != comment.author:
-        return HttpResponse('You are not allowed here!')
+        return HttpResponse("You are not allowed here!")
 
-    if request.method == 'POST':
+    if request.method == "POST":
         comment.delete()
         # TODO: think whether to redirect to a parent comment or home
-        return redirect('review', comment.review.id)
+        return redirect("review", comment.review.id)
 
-    context = {'obj': comment}
-    return render(request, 'base/delete.html', context)
+    context = {"obj": comment}
+    return render(request, "base/delete.html", context)
 
 
-# ===== ABOUT =====
+class AboutView(TemplateView):
+    template_name: str = "base/about.html"
 
-def about(request):
-    with open(settings.BASE_DIR / "static/markdown/about.md", "r") as f:
-        context = {'markdown_content': f.read()}
-    return render(request, 'base/about.html', context)
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        with open(settings.MARKDOWN_ROOT / "about.md", "r") as f:
+            context["markdown_content"] = f.read()
+        return context
 
 
 # ===== AUTHENTICATION =====
 
-def register_page(request):
-    form = UserCreationForm()
+class RegisterView(View):
+    """A class-based view used for `/register/`"""
 
-    if request.method == "POST":
+    def get(self, request):
+        form = UserCreationForm()
+        context = {'form': form}
+        return render(request, 'base/login_register.html', context)
+
+    def post(self, request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            # Login right after registration
+            # Login after registration
             login(request, user)
             return redirect('home')
         else:
             messages.error(request, 'An error occurred during registration')
-        
-    context = {'form': form}
-    return render(request, 'base/login_register.html', context)
 
 
-def login_page(request):
-    page = 'login'
-    if request.user.is_authenticated:
-        return redirect('home')
+class LoginView(View):
+    """A class-based view used for `/login/`"""
 
-    if request.method == 'POST':
-        username = request.POST.get('username').lower()
-        password = request.POST.get('password')
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('home')
+
+        context = {'page': 'login'}
+        return render(request, 'base/login_register.html', context)
+
+    def post(self, request):
+        username = request.POST.get("username").lower()
+        password = request.POST.get("password")
 
         try:
             user = User.objects.get(username=username)
         except:
-            messages.error(request, 'User does not exist')
+            messages.error(request, "User does not exist")
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Username or password entered wrong')
-
-    context = {'page': page}
-    return render(request, 'base/login_register.html', context)
+            messages.error(request, "Email or Password entered wrong")
+            return redirect('login')
 
 
-def logout_user(request):
-    logout(request)
-    return redirect('home')
+class LogoutRedirectView(RedirectView):
+    pattern_name: Optional[str] = "home"
+
+    def get_redirect_url(self, *args: Any, **kwargs: Any) -> Optional[str]:
+        logout(self.request)
+        return super().get_redirect_url(*args, **kwargs)
 
 
-def user_profile(request, pk):
-    user = User.objects.get(id=pk)
-    latest_review = user.review_set.first()
-    review_comments = user.comment_set.all()[0:2]
-    context = {
-        'user': user,
-        'latest_review': latest_review,
-        'review_comments': review_comments,
-    }
-    return render(request, 'base/profile.html', context)
+class UserProfileDetailView(DetailView):
+    model = User
+    template_name: str = "base/profile.html"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        user = User.objects.get(id=self.kwargs.get("pk"))
+        context = super().get_context_data(**kwargs)
+        context["user"] = user
+        context["latest_review"] = user.review_set.first()
+        context["review_comments"] = user.comment_set.all()[0:2]
+        return context
 
 
-@login_required(login_url='login')
+@login_required(login_url="login")
 def update_user(request):
     user = request.user
     form = UserForm(instance=user)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = UserForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile', pk=user.id)
+            return redirect("profile", pk=user.id)
 
-    context = {'form': form}
-    return render(request, 'base/update_user.html', context)
+    context = {"form": form}
+    return render(request, "base/update_user.html", context)

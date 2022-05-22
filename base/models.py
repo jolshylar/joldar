@@ -16,13 +16,13 @@ class Review(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-updated', '-created']
+        ordering = ["-updated", "-created"]
 
     def __str__(self):
         return self.title
 
     def short_content(self):
-        return f'{self.body[0:200]}' + '...' if len(self.body) > 200 else self.body
+        return f"{self.body[0:200]}" + "..." if len(self.body) > 200 else self.body
 
 
 class Comment(models.Model):
@@ -36,7 +36,7 @@ class Comment(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-updated', '-created']
+        ordering = ["-updated", "-created"]
 
     def __str__(self):
-        return f'{self.body[0:32]}'
+        return f"{self.body[0:32]}"

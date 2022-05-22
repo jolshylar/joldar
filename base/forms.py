@@ -7,11 +7,11 @@ from .models import Review
 class ReviewForm(ModelForm):
     class Meta:
         model = Review
-        fields = '__all__'
-        exclude = ['author']
+        fields = "__all__"
+        exclude = ["author"]
 
 
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ["username", "email"]
