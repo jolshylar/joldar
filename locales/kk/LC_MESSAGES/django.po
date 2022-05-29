@@ -129,7 +129,7 @@ msgstr "Пікір қалдыру үшін жүйеге кіріңіз!"
 
 #: base/templates/base/review_form.html:13
 msgid "Create/Update Review"
-msgstr "Бағаны Қалдыру/Өңдеу"
+msgstr "Бағаны Қалдыру/Жаңарту"
 
 #: base/templates/base/review_form.html:21
 msgid "Review Title"
