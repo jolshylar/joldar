@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <main class="create-review layout">
@@ -10,20 +10,20 @@
           <a href="{% url 'home' %}">
             <img src="{% static 'images/icons/arrow-left.svg' %}" />
           </a>
-          <h3>Update Comment</h3>
+          <h3>{% translate "Update Comment" %}</h3>
         </div>
       </div>
       <div class="layout__body">
         <form class="form" action="" method="post">
           {% csrf_token %}
           <div class="form__group">
-            <label for="comment_body">Comment Body</label>
-            <textarea name="body" placeholder="Write an update for your comment">{{old_body}}</textarea>
+            <label for="comment_body">{% translate "Comment Body" %}</label>
+            <textarea name="body" placeholder="{% translate 'Write an update for your comment' %}">{{old_body}}</textarea>
           </div>
           <div class="form__action">
             <button class="btn btn--main" type="submit">
               <img src="{% static 'images/icons/add.svg' %}" > 
-              <p>Update</p>
+              <p>{% translate "Update" %}</p>
             </button>
           </div>
         </form>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static %}
+{% load static i18n %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,7 +11,7 @@
       type="image/x-icon"
       href="{% static 'images/favicon.png' %}"
     />
-    <title>Joldar Project - Road Reports</title>
+    <title>{% translate "Joldar Project - Road Reports" %}</title>
   </head>
   <body>
     {% include 'navbar.html' %}

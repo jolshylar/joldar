@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <main class="create-review layout">
@@ -10,7 +10,7 @@
           <a href="{% url 'home' %}">
             <img src="{% static 'images/icons/arrow-left.svg' %}" />
           </a>
-          <h3>Create/Update Review</h3>
+          <h3>{% translate "Create/Update Review" %}</h3>
         </div>
       </div>
       <div class="layout__body">
@@ -18,18 +18,23 @@
           {% csrf_token %}
 
           <div class="form__group">
-            <label for="review_title">Review Title</label>
+            <label for="review_title">{% translate "Review Title" %}</label>
             {{ form.title }}
           </div>
 
           <div class="form__group">
-            <label for="review_summary">Review Summary</label>
+            <label for="review_summary">{% translate "Review Summary" %}</label>
             {{ form.summary }}
           </div>
 
           <div class="form__group">
-            <label for="review_body">Review Body</label>
+            <label for="review_body">{% translate "Review Body" %}</label>
             {{ form.body }}
+          </div>
+
+          <div class="form__group preview-group">
+            <label for="review_image">{% translate "Review Preview" %}</label>
+            {{ form.image }}
           </div>
 
           <div class="form__action">

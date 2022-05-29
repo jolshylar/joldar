@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.utils.translation import gettext as _
 # Class-based Views
 from django.views import View
 from django.views.generic import TemplateView
@@ -76,7 +77,7 @@ def update_review(request, pk):
     form = ReviewForm(instance=review)
 
     if request.user != review.author:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse(_("You are not allowed here!"))
 
     if request.method == "POST":
         review.title = request.POST.get("title")
@@ -95,7 +96,7 @@ def update_comment(request, pk):
     old_body = comment.body
 
     if request.user != comment.author:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse(_("You are not allowed here!"))
 
     if request.method == "POST":
         comment.body = request.POST.get("body")
@@ -111,7 +112,7 @@ def delete_review(request, pk):
     review = Review.objects.get(id=pk)
 
     if request.user != review.author:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse(_("You are not allowed here!"))
 
     if request.method == "POST":
         review.delete()
@@ -126,7 +127,7 @@ def delete_comment(request, pk):
     comment = Comment.objects.get(id=pk)
 
     if request.user != comment.author:
-        return HttpResponse("You are not allowed here!")
+        return HttpResponse(_("You are not allowed here!"))
 
     if request.method == "POST":
         comment.delete()
@@ -167,7 +168,7 @@ class RegisterView(View):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'An error occurred during registration')
+            messages.error(request, _('An error occurred during registration'))
 
 
 class LoginView(View):
@@ -187,14 +188,14 @@ class LoginView(View):
         try:
             user = User.objects.get(username=username)
         except:
-            messages.error(request, "User does not exist")
+            messages.error(request, _("User does not exist"))
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, "Email or Password entered wrong")
+            messages.error(request, _("Email or Password entered wrong"))
             return redirect('login')
 
 

@@ -1,16 +1,28 @@
-{% load static %}
+{% load static i18n %}
 <header>
   <div class="container container-header">
     <a href="{% url 'home' %}" class="header__logo">
       <img src="{% static 'images/logo.png' %}" />
     </a>
     <nav class="header__menu">
-      <a href="{% url 'home' %}">Home</a>
-      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'home' %}">{% translate "Home" %}</a>
+      <a href="{% url 'about' %}">{% translate "About" %}</a>
+      <div class="language">
+        <span>{% translate "Language" %}</span>
+        <div class="language-content">
+          {% get_available_languages as languages %}
+          {% for lang_code, lang_name in languages %}
+          {% language lang_code %}
+          <a href="{% url 'home' %}">{{ lang_name }}</a>
+          {% endlanguage %}
+          {% endfor %}
+        </div>
+      </div>
 
       {% if request.user.is_authenticated %}
-      <a href="{% url 'create-review' %}">Create Review</a>
+      <a href="{% url 'create-review' %}">{% translate "Create Review" %}</a>
       <a href="{% url 'profile' request.user.id %}">
+        <!-- TODO: display user avatar -->
         <img class="user-img" src="{% static 'images/icons/user.svg' %}" />
       </a>
       {% else %}

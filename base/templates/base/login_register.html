@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <main class="auth layout">
@@ -8,42 +8,42 @@
     <div class="layout__box">
       <div class="layout__boxHeader">
         <div class="layout__boxTitle">
-          <h3>Login</h3>
+          <h3>{% translate "Login" %}</h3>
         </div>
       </div>
       <div class="layout__body">
-        <h4 class="auth__tagline">Write reviews about road quality</h4>
+        <h4 class="auth__tagline">{% translate "Write reviews about road quality" %}</h4>
 
         <form class="form" action="" method="post">
           {% csrf_token %}
           <div class="form__group form__group">
-            <label for="review_name">Username</label>
+            <label for="review_name">{% translate "Username" %}</label>
             <input
               id="username"
               name="username"
               type="text"
-              placeholder="e.g. dosya1999"
+              placeholder="{% translate 'e.g. dosya1999' %}"
             />
           </div>
           <div class="form__group">
-            <label for="password">Password</label>
+            <label for="password">{% translate "Password" %}</label>
             <input
               id="password"
               name="password"
               type="password"
-              placeholder="we need a powerful password"
+              placeholder="{% translate 'we need a powerful password' %}"
             />
           </div>
 
           <button class="btn btn--main" type="submit">
             <img src="{% static 'images/icons/user-group.svg' %}" />
-            <p>Login</p>
+            <p>{% translate "Login" %}</p>
           </button>
         </form>
 
         <div class="auth__action__log">
-          <p>Haven't signed up yet?</p>
-          <a href="{% url 'register' %}">Sign Up</a>
+          <p>{% translate "Haven't signed up yet?" %}</p>
+          <a href="{% url 'register' %}">{% translate "Sign Up" %}</a>
         </div>
       </div>
     </div>
@@ -53,11 +53,11 @@
     <div class="layout__box">
       <div class="layout__boxHeader">
         <div class="layout__boxTitle">
-          <h3>Register</h3>
+          <h3>{% translate "Register" %}</h3>
         </div>
       </div>
       <div class="layout__body">
-        <h4 class="auth__tagline">Write reviews about road quality</h4>
+        <h4 class="auth__tagline">{% translate "Write reviews about road quality" %}</h4>
 
         <form class="form" action="" method="post">
           {% csrf_token %}
@@ -70,13 +70,13 @@
 
           <button class="btn btn--main" type="submit">
             <img src="{% static 'images/icons/user-group.svg' %}" />
-            <p>Register</p>
+            <p>{% translate "Register" %}</p>
           </button>
         </form>
 
         <div class="auth__action">
-          <p>Already signed up?</p>
-          <a href="{% url 'login' %}">Log In</a>
+          <p>{% translate "Already signed up?" %}</p>
+          <a href="{% url 'login' %}">{% translate "Login" %}</a>
         </div>
       </div>
     </div>

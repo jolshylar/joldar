@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <main class="delete-item layout">
@@ -10,20 +10,21 @@
           <a href="{{ request.META.HTTP_REFERER }}">
             <img class="arrow-img" src="{% static 'images/icons/arrow-left.svg' %}" />
           </a>
-          <h3>Back</h3>
+          <h3>{% translate "Back" %}</h3>
         </div>
       </div>
       <div class="layout__body">
         <form class="form" action="" method="post">
           {% csrf_token %}
           <!-- <div class="form__group"> -->
-          <p style="text-align: center;">Are you sure you want to delete "{{obj}}"?</p>
+          <p style="text-align: center;">{% translate "Are you sure you want to delete" %}</p>
+          <p style="text-align: center;" >"{{obj}}"?</p>
           <!-- </div> -->
 
           <div class="confirm__group">
             <button class="btn btn--main" type="submit" value="Confirm">
               <img src="{% static 'images/icons/delete.svg' %}" />
-              <p>Confirm</p>
+              <p>{% translate "Confirm" %}</p>
             </button>
             <!-- <input class="btn btn--main" type="submit" value="Confirm" /> -->
           </div>

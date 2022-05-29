@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static base_extras %}
+{% load static base_extras i18n %}
 
 {% block content %}
 <main class="profile-page layout layout--3">
@@ -13,24 +13,26 @@
             <div>
               <h1 class="profile-name">@{{ user.username }}</h1>
               {% if request.user == user %}
-              <a href="{% url 'update-user' %}" class="edit">Edit Profile</a>
+              <a href="{% url 'update-user' %}" class="edit">{% translate "Edit Profile" %}</a>
               {% endif %}
             </div>
           </div>
-          <p class="date">Here since {{ user.date_joined }}</p>
+          <p class="date">est. {{ user.date_joined }}</p>
 
           <div class="reviewList__header">
             {% if latest_review %}
             <div>
-              <h2 class="about-user">Latest Review by @{{ user.username }}</h2>
+              <h2 class="about-user">{% translate "Latest Review by" %} @{{ user.username }}</h2>
             </div>
             <!-- for loop + reviews in pretty boxes -->
             <div class="review__box scroll"> 
               <div class="review__header scroll">
                 <div class="review__info">
-                  <h3><a href="{% url 'review' latest_review.id %}">{{latest_review.title}} - {{latest_review.summary}}</a></h3>
+                  <h3>
+                    <a href="{% url 'review' latest_review.id %}">{{ latest_review.title }} - {{ latest_review.summary }}</a>
+                  </h3>
                   <div class="paragraph-wrapper">
-                    <p>Created {{latest_review.created | timesince}} ago</p>
+                    <p>{{ latest_review.created | timesince }} {% translate "ago" %}</p>
                   </div>
                 </div>
               </div>
@@ -40,7 +42,7 @@
                     <div class="thread__details">
                       {{ latest_review.short_content | convert_markdown | safe }}
                       {% if latest_review.body|length > 200 %}
-                      <a href="{% url 'review' latest_review.id %}">Read More</a>
+                      <a href="{% url 'review' latest_review.id %}">{% translate "Read More" %}</a>
                       {% endif %}
                     </div>
                   </div>
@@ -49,20 +51,20 @@
             </div>
             {% else %}
             <div>
-              <h2 class="about-user">User has no reviews yet</h2>
+              <h2 class="about-user">{% translate "User has no reviews yet" %}</h2>
             </div>
             {% endif %}
           </div>
         </div>
       </div>
     </div>
-    
+
     {% if request.user == user %}
     <div class="reviewLogout">
       <a href="{% url 'logout' %}">
         <button class="btn btn--main">
          <img src="{% static 'images/icons/sign-out.svg' %}" />
-         <p>Sign Out</p>
+         <p>{% translate "Logout" %}</p>
        </button>
      </a>
     </div>

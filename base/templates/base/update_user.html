@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <main class="update-account layout">
@@ -10,7 +10,7 @@
           <a href="{% url 'profile' user.id %}">
             <img src="{% static 'images/icons/arrow-left.svg' %}" class="arrow-img"/>
           </a>
-          <h3>Edit your profile</h3>
+          <h3>{% translate "Edit your profile" %}</h3>
         </div>
       </div>
       <div class="layout__body">
@@ -27,7 +27,7 @@
           <div class="form__action">
             <button class="btn btn--main" type="submit">
               <img src="{% static 'images/icons/edit.svg' %}" />
-              <p>Update</p>
+              <p>{% translate "Update" %}</p>
             </button>
           </div>
         </form>
