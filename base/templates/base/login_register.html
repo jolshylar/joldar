@@ -17,12 +17,12 @@
         <form class="form" action="" method="post">
           {% csrf_token %}
           <div class="form__group form__group">
-            <label for="review_name">{% translate "Username" %}</label>
+            <label for="review_name">{% translate "Email" %}</label>
             <input
-              id="username"
-              name="username"
+              id="email"
+              name="email"
               type="text"
-              placeholder="{% translate 'e.g. dosya1999' %}"
+              placeholder="{% translate 'e.g. jolshy@email.com' %}"
             />
           </div>
           <div class="form__group">

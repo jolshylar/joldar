@@ -2,5 +2,6 @@ asgiref==3.5.0
 Django==4.0.4
 importlib-metadata==4.11.3
 Markdown==3.3.6
+Pillow==9.1.1
 sqlparse==0.4.2
 zipp==3.8.0

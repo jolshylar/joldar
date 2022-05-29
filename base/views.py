@@ -1,13 +1,11 @@
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
 
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from django.utils.translation import gettext as _
 # Class-based Views
 from django.views import View
@@ -15,9 +13,10 @@ from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+
 # Local imports
-from base.forms import ReviewForm, UserForm
-from base.models import Comment, Review
+from base.forms import CustomUserCreationForm, ReviewForm, UserForm
+from base.models import Comment, Review, User
 
 
 class HomeView(ListView):
@@ -51,8 +50,6 @@ def review(request, pk):
 
 
 # ===== REVIEW CRUD =====
-
-
 @login_required(login_url="login")
 def create_review(request):
     state = "Create"
@@ -149,26 +146,23 @@ class AboutView(TemplateView):
 
 
 # ===== AUTHENTICATION =====
-
 class RegisterView(View):
     """A class-based view used for `/register/`"""
 
     def get(self, request):
-        form = UserCreationForm()
-        context = {'form': form}
-        return render(request, 'base/login_register.html', context)
+        form = CustomUserCreationForm()
+        context = {"form": form}
+        return render(request, "base/login_register.html", context)
 
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
+            user = form.save()
             # Login after registration
             login(request, user)
-            return redirect('home')
+            return redirect("home")
         else:
-            messages.error(request, _('An error occurred during registration'))
+            messages.error(request, _("An error occurred during registration"))
 
 
 class LoginView(View):
@@ -176,27 +170,27 @@ class LoginView(View):
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect('home')
+            return redirect("home")
 
-        context = {'page': 'login'}
-        return render(request, 'base/login_register.html', context)
+        context = {"page": "login"}
+        return render(request, "base/login_register.html", context)
 
     def post(self, request):
-        username = request.POST.get("username").lower()
+        email = request.POST.get("email")
         password = request.POST.get("password")
 
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(email=email)
         except:
             messages.error(request, _("User does not exist"))
 
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect("home")
         else:
             messages.error(request, _("Email or Password entered wrong"))
-            return redirect('login')
+            return redirect("login")
 
 
 class LogoutRedirectView(RedirectView):
@@ -208,7 +202,7 @@ class LogoutRedirectView(RedirectView):
 
 
 class UserProfileDetailView(DetailView):
-    model = User
+    model = get_user_model()
     template_name: str = "base/profile.html"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -226,7 +220,7 @@ def update_user(request):
     form = UserForm(instance=user)
 
     if request.method == "POST":
-        form = UserForm(request.POST, instance=user)
+        form = UserForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect("profile", pk=user.id)

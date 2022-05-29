@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
 ]
 
+AUTH_USER_MODEL = 'base.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -112,6 +114,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LOCALE_PATHS = (
+    BASE_DIR / 'locales',
+)
+
+LANGUAGES = (
+    ('en', _("English")),
+    ("kk", _("Kazakh")),
+)
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -137,16 +148,3 @@ MARKDOWN_ROOT = BASE_DIR / STATIC_URL / MARKDOWN_URL
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# L10N and I18N
-# https://docs.djangoproject.com/en/4.0/topics/i18n/translation/
-LOCALE_PATHS = (
-    BASE_DIR / 'locales',
-)
-
-LANGUAGE_CODE = 'en'
-
-LANGUAGES = (
-    ('en', _("English")),
-    ("kk", _("Kazakh")),
-)
