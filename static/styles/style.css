@@ -9,7 +9,7 @@
   --color-background: #e5e5e5;
 }
 
-/* ===== Base styles ===== */
+/* ===== Base Styles ===== */
 
 * {
   font-family: "Poppins", sans-serif;
@@ -48,17 +48,11 @@ a {
 }
 
 .joldar-link {
-  display: inline_block;
+  display: inline-block;
 }
 
-/* ===== Components ===== */
+/* ===== Navigation Bar ===== */
 
-.container-home {
-  display: flex;
-  justify-content: center;
-}
-
-/*===== NavBar =====*/
 header {
   padding: 1.5rem;
   background-color: var(--color-light);
@@ -66,7 +60,7 @@ header {
 
 header > .container {
   display: flex;
-  gap: 9.5vw;
+  gap: 9.5rem;
 }
 
 .header__logo {
@@ -85,7 +79,7 @@ header > .container {
   position: relative;
   display: flex;
   justify-content: space-between;
-  gap: 2.5vw;
+  gap: 2.5rem;
   align-items: center;
 }
 
@@ -102,11 +96,12 @@ nav > a:hover {
 }
 
 .container-header {
-  margin-left: 2vw;
-  margin-right: 2vw;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
-/*====== Review Page =====*/
+/* ===== Review Page ===== */
+
 .review__box {
   background-color: var(--color-light);
   border-radius: 20px;
@@ -150,12 +145,7 @@ nav > a:hover {
   color: var(--color-text);
 }
 
-/*===== About Page ====*/
-.about-page {
-  margin: 20px 10rem;
-}
-
-/*========== Layout Box ==========*/
+/* ===== Layout Box ===== */
 
 .layout__box {
   border-radius: 10px;
@@ -244,7 +234,7 @@ nav > a:hover {
   margin-top: 20%;
 }
 
-/* Review Writing */
+/* ===== Review Writing ===== */
 
 .layout__boxer {
   border-radius: 10px;
@@ -338,7 +328,7 @@ code {
 
 /*===== Review Main =====*/
 
-.baton {
+.btn--main {
   text-align: center;
   border: none;
   width: 80px;
@@ -348,11 +338,11 @@ code {
   color: var(--color-light);
 }
 
-.baton:hover {
+.btn--main:hover {
   box-shadow: 0 0 5px var(--color-dark);
 }
 
-.baton img {
+.btn--main img {
   height: 45%;
 }
 
@@ -361,6 +351,7 @@ code {
 }
 
 /* ===== Comments ===== */
+
 .review__form input {
   margin-left: 2vw;
   width: 90%;
@@ -492,6 +483,10 @@ code {
 /* ===== About Page ===== */
 
 .about-page {
+  margin: 20px 10rem;
+}
+
+.about-page {
   background-color: var(--color-light);
   font-size: 2rem;
   margin: 5%;
@@ -536,17 +531,20 @@ code {
 }
 
 /* ====== Pagination ====== */
+
 .container-home {
   display: flex;
+  justify-content: space-between;
 }
 
-.left-arrow img, .right-arrow img {
+.left-arrow img,
+.right-arrow img {
   height: 64px;
   width: 64px;
-  /* margin-top: 50%; */
 }
 
-.left-arrow, .right-arrow {
+.left-arrow,
+.right-arrow {
   margin-top: 15%;
 }
 
@@ -554,3 +552,78 @@ code {
   width: 95%;
 }
 
+.page-counter {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+/* ===== Dropdown Menu ===== */
+
+.dropdown {
+  background-color: #262c36;
+  width: 12%;
+  min-height: 100px;
+  max-height: max-content;
+  margin-left: 72%;
+  position: absolute;
+}
+
+.language {
+  position: relative;
+  display: inline-block;
+}
+
+.language-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.language:hover .language-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-group input {
+  background-color: transparent;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 0;
+}
+
+.preview-group input:hover {
+  box-shadow: none;
+}
+
+.preview-group input {
+  color: transparent;
+}
+
+.preview-group input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.preview-group input::before {
+  content: "Upload your images";
+  color: var(--color-main);
+  background: -webkit-linear-gradient(top, #dedede, #dbd4d4);
+  border-radius: 3px;
+  padding: 7px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.preview-group input:hover::before {
+  border-color: black;
+}
+
+.preview-group input:active {
+  outline: 0;
+}
