@@ -441,7 +441,7 @@ code {
   width: 36px;
   height: 36px;
   border-radius: 10%;
-  background-color: var(--color-background);
+  background-color: var(--color-link);
   color: var(--color-dark);
   font-size: 45%;
 }
