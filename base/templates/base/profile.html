@@ -9,7 +9,7 @@
       <div class="profile">
         <div class="profile__info">
           <div class="avatar avatar--large active">
-            <img src="{% static 'images/avatar.svg' %}" height="100px" class="profile-img"/>
+            <img src="{{ user.avatar.url }}" height="100px" class="profile-img"/>
             <div>
               <h1 class="profile-name">@{{ user.username }}</h1>
               {% if request.user == user %}

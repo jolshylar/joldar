@@ -8,7 +8,7 @@
       <div class="review__box scroll"> 
         <div class="review__header scroll">
           <div class="review__author">
-            <img src="{% static 'images/avatar.svg' %}" style="height: 36px;" />
+            <img src="{{ user.avatar.url }}" style="height: 36px;" />
             <h1><a href="{% url 'profile' review.author.id %}">@{{ review.author.username }}</a></h1>
           </div>
           {% if request.user == review.author %}
@@ -64,7 +64,7 @@
         {% for comment in review_comments %}
           <div class="comment__header scroll">
             <div class="comment__author">
-              <img src="{% static 'images/avatar.svg' %}" style="height: 36px;" />
+              <img src="{{ user.avatar.url }}" style="height: 36px;" />
               <h1><a href="{% url 'profile' comment.author.id %}">@{{ comment.author.username }}</a></h1>
               {% if request.user == comment.author %}
               <div class="delete-button-wrapper">

@@ -22,7 +22,7 @@
         <div class="review__box scroll">
           <div class="review__header scroll">
             <div class="review__author">
-              <img src="{% static 'images/avatar.svg' %}" style="height: 36px;" />
+              <img src="{{ user.avatar.url }}" style="height: 36px;" />
               <h1><a href="{% url 'profile' review.author.id %}">@{{ review.author.username }}</a></h1>
             </div>
             <div class="review__info">
