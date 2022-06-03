@@ -70,8 +70,8 @@ header > .container {
 }
 
 .header__logo > img {
-  max-height: 8vh;
-  width: auto;
+  max-width: 12vw;
+  height: auto;
 }
 
 .header__menu {
@@ -137,6 +137,10 @@ nav > a:hover {
   gap: 1rem;
 }
 
+.review__author > img {
+  border-radius: 50%;
+}
+
 .review__author h1 {
   font-size: 24px;
 }
@@ -159,6 +163,23 @@ nav > a:hover {
 }
 
 @media only screen and (max-width: 480px) {
+  .left-arrow,
+  .right-arrow {
+    display: none;
+  }
+
+  .left img,
+  .right img {
+    height: 1rem;
+  }
+
+  .page-counter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+
   .layout__box {
     margin-left: 5%;
     width: 90%;
@@ -239,8 +260,8 @@ nav > a:hover {
 .layout__boxer {
   border-radius: 10px;
   background: var(--color-light);
-  margin: 100px 20%;
-  width: 60%;
+  margin: 100px 25%;
+  width: 50%;
   max-height: max-content;
   min-height: min-content;
   box-shadow: 0 0 20px var(--color-background);
@@ -282,11 +303,13 @@ textarea:hover {
 
 .profile-img {
   margin-top: 20px;
+  width: 80px;
+  height: 80px;
 }
 
 .profile-name {
   margin-top: 30px;
-  font-size: 40px;
+  font-size: 25px;
 }
 
 .about-user {
@@ -331,8 +354,6 @@ code {
 .btn--main {
   text-align: center;
   border: none;
-  width: 80px;
-  height: 60px;
   border-radius: 5px;
   background-color: var(--color-link);
   color: var(--color-light);
@@ -549,7 +570,7 @@ code {
 }
 
 .review-home {
-  width: 95%;
+  width: 100%;
 }
 
 .page-counter {
@@ -626,4 +647,17 @@ code {
 
 .preview-group input:active {
   outline: 0;
+}
+
+/* SVGs */
+.user-img {
+  max-width: 3vw;
+}
+
+/* ===== Media for Pagination =====  */
+@media screen and (min-width: 480px) {
+  .left,
+  .right {
+    display: none;
+  }
 }

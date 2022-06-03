@@ -22,7 +22,7 @@ from base.models import Comment, Review, User
 class HomeView(ListView):
     model = Review
     template_name: str = "base/home.html"
-    paginate_by: int = 3
+    paginate_by: int = 5
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -163,6 +163,7 @@ class RegisterView(View):
             return redirect("home")
         else:
             messages.error(request, _("An error occurred during registration"))
+            return redirect("register")
 
 
 class LoginView(View):
