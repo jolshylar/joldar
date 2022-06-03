@@ -133,19 +133,19 @@ msgstr "Бағаны Қалдыру/Жаңарту"
 
 #: base/templates/base/review_form.html:21
 msgid "Review Title"
-msgstr "Баға Тақырыбы"
+msgstr "Тақырыбы"
 
 #: base/templates/base/review_form.html:26
 msgid "Review Summary"
-msgstr "Баға Қысқа Сөзбен"
+msgstr "Қысқа Сөзбен"
 
 #: base/templates/base/review_form.html:31
 msgid "Review Body"
-msgstr "Баға Мазмұны"
+msgstr "Мазмұны"
 
 #: base/templates/base/review_form.html:36
 msgid "Review Preview"
-msgstr "Баға Суреті"
+msgstr "Суреті"
 
 #: base/templates/base/update_comment.html:13
 msgid "Update Comment"
